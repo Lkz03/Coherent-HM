@@ -12,35 +12,33 @@ mistakes when entering.*/
 
 class TaskTwo
 {
-    private const int ISBNcount = 10;
-    private static string nineDigits;
-    private static void readInput()
-    {
-        Console.WriteLine("Enter the 9 digits of ISBN number:");
-        nineDigits = Console.ReadLine();
-    }
+ private const int _ISBNcount = 10;
+ private static string _nineDigits;
+ private static void readInput()
+ {
+  Console.WriteLine("Enter the 9 digits of ISBN number:");
+  _nineDigits = Console.ReadLine();
+ }
+ private static int getCheckDigit()
+ {
+  int multiplier = 1;
+  int[] result = new int[9];
+  char[] temp = _nineDigits.ToCharArray();
+  for (int i = 0; i < 9; i++)
+  {
+   result[i] = (temp[i] - '0') * multiplier;
+   multiplier++;
+  }
+  return result.Sum() % 11;
+ }
 
-    private static int getCheckDigit()
-    {
-        int j = 1;
-        int[] result = new int[9];
-        char[] temp = nineDigits.ToCharArray();
-        for (int i = 0; i < 9; i++)
-        {
-            result[i] = (temp[i] - '0') * j;
-            j++;
-        }
-        
-        return result.Sum() % 11;
-    }
-
-    public static void executeTask()
-    {
-        readInput();
-        Console.Write("ISBN: ");
-        if (getCheckDigit() != 10)
-            Console.WriteLine("{0}{1}", nineDigits, getCheckDigit());
-        else
-            Console.WriteLine("{0}{1}", nineDigits, 'X');
-    }
+ public static void executeTask()
+ {
+  readInput();
+  Console.Write("ISBN: ");
+  if (getCheckDigit() != 10)
+  Console.WriteLine("{0}{1}", _nineDigits, getCheckDigit());
+  else
+  Console.WriteLine("{0}{1}", _nineDigits, 'X');
+ }
 }
