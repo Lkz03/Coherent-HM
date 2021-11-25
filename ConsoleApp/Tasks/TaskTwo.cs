@@ -14,16 +14,19 @@ class TaskTwo
 {
  private const int _ISBNcount = 10;
  private static string _nineDigits;
+
  private static void readInput()
  {
   Console.WriteLine("Enter the 9 digits of ISBN number:");
   _nineDigits = Console.ReadLine();
  }
+
  private static int getCheckDigit()
  {
   int multiplier = 1;
   int[] result = new int[9];
   char[] temp = _nineDigits.ToCharArray();
+
   for (int i = 0; i < 9; i++)
   {
    result[i] = (temp[i] - '0') * multiplier;

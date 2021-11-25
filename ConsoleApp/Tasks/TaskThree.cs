@@ -9,22 +9,27 @@ Example: array [1, 3, 5, 1, 0, 3, 0, 1]. The sum of the required elements = 5 + 
 class TaskThree
 {
  private static int[] _array;
+
  private static void readInput()
  {
  int temp;
+
  Console.WriteLine("Enter the size for an array");
  temp = Convert.ToInt32(Console.ReadLine());
  _array = new int[temp];
+
  for (int i=0; i<_array.Length; i++)
   {
   Console.WriteLine("Enter a number to add to the array");
   _array[i] = Convert.ToInt32(Console.ReadLine());
   }
  }
+
  private static int findMinLocation()
  {
   int min = _array[0];
   int index = 0;
+
   for (int i = 1; i < _array.Length; i++)
   {
    if (_array[i] < min) 
@@ -35,10 +40,12 @@ class TaskThree
   }
   return index;   
  }
+
  private static int findMaxLocation()
  {
   int max = _array[0];
   int index = 0;
+
   for (int i = 1; i < _array.Length; i++)
   {
    if (_array[i] >= max)
@@ -53,6 +60,7 @@ class TaskThree
  private static int sumFromMinToMax()
  {
   int sum = 0;
+
   if (findMinLocation() < findMaxLocation())
   {
    for (int i = findMinLocation(); i <= findMaxLocation(); i++)
