@@ -13,7 +13,7 @@ mistakes when entering.*/
 class TaskTwo
 {
  private const int _ISBNcount = 10;
- private static string _nineDigits;
+ private static string _nineDigits = string.Empty;
 
  private static void readInput()
  {
