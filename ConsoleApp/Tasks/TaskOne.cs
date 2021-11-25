@@ -27,7 +27,7 @@ class TaskOne
   }
   return ternaryNumber;
  }
- static private bool checkForTwos(string parString)
+ static private bool hasTwos(string parString)
  {
   for(int i=0; i<parString.Length; i++)
   {
@@ -42,7 +42,7 @@ class TaskOne
   for (int i=_from; i<=_to; i++)
   {
    _string = convertToTernary(i);
-   if(checkForTwos(_string)) Console.WriteLine(i);
+   if(hasTwos(_string)) Console.WriteLine(i);
   }
  }
 }
