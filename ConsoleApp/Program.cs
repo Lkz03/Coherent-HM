@@ -4,6 +4,6 @@
     // For example: "TaskOne.executeTask()" to "TaskTwo.executeTask()".
     static void Main()
     {
-        TaskThree.executeTask();
+        TaskTwo.executeTask();
     }
 }
