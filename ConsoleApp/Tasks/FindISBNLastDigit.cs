@@ -10,12 +10,11 @@ first nine digits of the ISBN), calculates the check digit, and prints the resul
 not check the correctness of the user's input - assume that the user does not make
 mistakes when entering.*/
 
-class TaskTwo
+public class FindISBNLastDigit
 {
- private const int _ISBNcount = 10;
  private static string _nineDigits = string.Empty;
 
- private static void ReadInput()
+ private static void ReadFirstNineDigits()
  {
   Console.WriteLine("Enter the 9 digits of ISBN number:");
   _nineDigits = Console.ReadLine();
@@ -23,26 +22,31 @@ class TaskTwo
 
  private static int GetCheckDigit()
  {
-  int multiplier = 1;
   int[] result = new int[9];
   char[] temp = _nineDigits.ToCharArray();
 
   for (int i = 0; i < 9; i++)
   {
-   result[i] = (temp[i] - '0') * multiplier;
-   multiplier++;
+   result[i] = (temp[i] - '0') * (i + 1);
   }
   return result.Sum() % 11;
  }
 
+ private static string GetISBNNumber()
+ {
+  int lastDigit = GetCheckDigit();
+
+  if (lastDigit == 10) 
+  {
+   return _nineDigits + "X";
+  }
+  return _nineDigits + lastDigit;
+ }
+
  public static void ExecuteTask()
  {
-  ReadInput();
-  Console.Write("ISBN: ");
-  if (GetCheckDigit() != 10)
-   Console.WriteLine("{0}{1}", _nineDigits, GetCheckDigit());
-  else
-   Console.WriteLine("{0}{1}", _nineDigits, 'X');
+  ReadFirstNineDigits();
+  Console.WriteLine(GetISBNNumber());
  }
 }
 

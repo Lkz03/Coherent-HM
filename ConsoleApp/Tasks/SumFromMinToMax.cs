@@ -6,22 +6,22 @@ are several) and the largest element (the rightmost element if there are several
 a console application that implements the specified functionality.
 Example: array [1, 3, 5, 1, 0, 3, 0, 1]. The sum of the required elements = 5 + 1 + 0 = 6.*/
 
-class TaskThree
+public class SumFromMinToMax
 {
- private static int[] _array = new int[0];
+ private static int[] _array;
 
- private static void ReadInput()
+ private static void ReadArrayMembers()
  {
- int temp;
+  int temp;
 
- Console.WriteLine("Enter the size for an array");
- temp = Convert.ToInt32(Console.ReadLine());
- _array = new int[temp];
+  Console.WriteLine("Enter the size for an array");
+  temp = Convert.ToInt32(Console.ReadLine());
+  _array = new int[temp];
 
- for (int i=0; i<_array.Length; i++)
+  for (int i = 0; i < _array.Length; i++)
   {
-  Console.WriteLine("Enter a number to add to the array");
-  _array[i] = Convert.ToInt32(Console.ReadLine());
+   Console.WriteLine("Enter a number to add to the array");
+   _array[i] = Convert.ToInt32(Console.ReadLine());
   }
  }
 
@@ -57,32 +57,37 @@ class TaskThree
   return index;
  }
 
- private static int SumFromMinToMax()
+ private static int SumMembers(int minIndex, int maxIndex)
  {
   int sum = 0;
 
-  if (FindMinIndex() < FindMaxIndex())
+  for (int i = minIndex; i <= maxIndex; i++)
   {
-   for (int i = FindMinIndex(); i <= FindMaxIndex(); i++)
-   sum += _array[i];
-  } 
-  else
-  {
-   for(int i = FindMaxIndex(); i <= FindMinIndex(); i++)
    sum += _array[i];
   }
   return sum;
  }
 
- public static void ExecuteTask()
+ private static void ReturnArray()
  {
-  ReadInput();
   Console.WriteLine("Array: ");
   for (int i = 0; i < _array.Length; i++)
   {
-   if (i != _array.Length - 1) Console.Write(_array[i] + ", ");
-   else Console.Write(_array[i]);
+   if (i != _array.Length - 1)
+   {
+    Console.Write(_array[i] + ", ");
+   }
+   else
+   {
+    Console.Write(_array[i]);
+   }
   }
-  Console.WriteLine("\nSum of numbers from min to max: " + SumFromMinToMax());
+ }
+
+ public static void ExecuteTask()
+ {
+  ReadArrayMembers();
+  ReturnArray();
+  Console.WriteLine("\nSum of numbers from min to max: " + SumMembers(FindMinIndex(), FindMaxIndex()));
  }
 }
