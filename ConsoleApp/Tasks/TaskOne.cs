@@ -6,49 +6,57 @@ the specified functionality.*/
 
 class TaskOne
 {
- static private int _from, _to;
- static private string _string = String.Empty;
+    static private int _from, _to;
+    static private string _string = string.Empty;
 
- static private void ReadInput()
- {
-  Console.WriteLine("Enter number a");
-  _from = Convert.ToInt32(Console.ReadLine());
-  Console.WriteLine("Enter number b");
-  _to = Convert.ToInt32(Console.ReadLine());
- }
+    static private void ReadInput()
+    {
+        Console.WriteLine("Enter number a");
+        _from = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine("Enter number b");
+        _to = Convert.ToInt32(Console.ReadLine());
+    }
 
- static private string ConvertToTernary(int N)
- {
-  string ternaryNumber = String.Empty;
+    static private string ConvertToTernary(int N)
+    {
+        string ternaryNumber = string.Empty;
 
-  if (N == 0)
-  return ternaryNumber = "0";
+        // Add curly braces even for very simple "if" statements. 
+        if (N == 0) { 
+            ternaryNumber = "0";
+            return ternaryNumber;
+        }
 
-  while(N >= 1) 
-  {
-   ternaryNumber += N % 3;
-   N /= 3;
-  }
-  return ternaryNumber;
- }
+        while (N >= 1)
+        {
+            ternaryNumber += N % 3;
+            N /= 3;
+        }
+        return ternaryNumber;
+    }
 
- static private bool hasTwos(string parString)
- {
-  for(int i=0; i<parString.Length; i++)
-  {
-   if (parString[i] == '2') return true;
-  }
-  return false;
- }
+    // Method names are in upper case. 
+    static private bool HasTwos(string parString)
+    {
+        // The goal was to locate number what has exactly 2 '2' symbols.
+        // For example: '22' , '202';
+        for (int i = 0; i < parString.Length; i++)
+        {
+            // add braces here
+            if (parString[i] == '2') return true;
+        }
+        return false;
+    }
 
- static public void ExecuteTask()
- {
-  ReadInput();
-  Console.WriteLine("Number in an array from a to b that have a digit '2' in the ternary form:");
-  for (int i=_from; i<=_to; i++)
-  {
-   _string = ConvertToTernary(i);
-   if(hasTwos(_string)) Console.WriteLine(i);
-  }
- }
+    static public void ExecuteTask()
+    {
+        ReadInput();
+        Console.WriteLine("Number in an array from a to b that have a digit '2' in the ternary form:");
+        for (int i = _from; i <= _to; i++)
+        {
+            _string = ConvertToTernary(i);
+            // add braces here
+            if (HasTwos(_string)) Console.WriteLine(i);
+        }
+    }
 }

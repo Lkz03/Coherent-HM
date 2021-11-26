@@ -12,37 +12,41 @@ mistakes when entering.*/
 
 class TaskTwo
 {
- private const int _ISBNcount = 10;
- private static string _nineDigits = string.Empty;
+    private const int _ISBNcount = 10; //Constant declared, but not used. 
+    private static string? _nineDigits = string.Empty; // Shut up warning about possible null
 
- private static void ReadInput()
- {
-  Console.WriteLine("Enter the 9 digits of ISBN number:");
-  _nineDigits = Console.ReadLine();
- }
+    private static void ReadInput()
+    {
+        Console.WriteLine("Enter the 9 digits of ISBN number:");
+        _nineDigits = Console.ReadLine();
+    }
 
- private static int GetCheckDigit()
- {
-  int multiplier = 1;
-  int[] result = new int[9];
-  char[] temp = _nineDigits.ToCharArray();
+    private static int GetCheckDigit()
+    {        
+        int[] result = new int[9];
+        char[] temp = _nineDigits!.ToCharArray(); //! means that we are sure that user
+           //do not pass null, per requirements and
+           // we instruct complier turn off warning. 
 
-  for (int i = 0; i < 9; i++)
-  {
-   result[i] = (temp[i] - '0') * multiplier;
-   multiplier++;
-  }
-  return result.Sum() % 11;
- }
+        //Ususall we may do on null instead of !, but this is out of the scope now
 
- public static void ExecuteTask()
- {
-  ReadInput();
-  Console.Write("ISBN: ");
-  if (GetCheckDigit() != 10)
-   Console.WriteLine("{0}{1}", _nineDigits, GetCheckDigit());
-  else
-   Console.WriteLine("{0}{1}", _nineDigits, 'X');
- }
+        for (int i = 0; i < 9; i++)
+        {
+            //The goal of the update was not to remove multiplier variable,
+            // but express that it represents digital position. 
+            result[i] = (temp[i] - '0') * ( i + 1 ); 
+        }
+        return result.Sum() % 11;
+    }
+
+    public static void ExecuteTask()
+    {
+        ReadInput();
+        Console.Write("ISBN: ");
+        if (GetCheckDigit() != 10)
+            Console.WriteLine("{0}{1}", _nineDigits, GetCheckDigit());
+        else
+            Console.WriteLine("{0}{1}", _nineDigits, 'X');
+    }
 }
 

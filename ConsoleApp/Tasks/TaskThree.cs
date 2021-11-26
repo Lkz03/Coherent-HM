@@ -8,81 +8,83 @@ Example: array [1, 3, 5, 1, 0, 3, 0, 1]. The sum of the required elements = 5 + 
 
 class TaskThree
 {
- private static int[] _array = new int[0];
+    private static int[] _array = new int[0];
 
- private static void ReadInput()
- {
- int temp;
+    private static void ReadInput()
+    {
+        int temp;
 
- Console.WriteLine("Enter the size for an array");
- temp = Convert.ToInt32(Console.ReadLine());
- _array = new int[temp];
+        Console.WriteLine("Enter the size for an array");
+        temp = Convert.ToInt32(Console.ReadLine());
+        _array = new int[temp];
 
- for (int i=0; i<_array.Length; i++)
-  {
-  Console.WriteLine("Enter a number to add to the array");
-  _array[i] = Convert.ToInt32(Console.ReadLine());
-  }
- }
+        for (int i = 0; i < _array.Length; i++)
+        {
+            Console.WriteLine("Enter a number to add to the array");
+            _array[i] = Convert.ToInt32(Console.ReadLine());
+        }
+    }
 
- private static int FindMinIndex()
- {
-  int min = _array[0];
-  int index = 0;
+    private static int FindMinIndex()
+    {
+        int min = _array[0];
+        int index = 0;
 
-  for (int i = 1; i < _array.Length; i++)
-  {
-   if (_array[i] < min) 
-   {
-    min = _array[i];
-    index = i;
-   } 
-  }
-  return index;   
- }
+        for (int i = 1; i < _array.Length; i++)
+        {
+            if (_array[i] < min)
+            {
+                min = _array[i];
+                index = i;
+            }
+        }
+        return index;
+    }
 
- private static int FindMaxIndex()
- {
-  int max = _array[0];
-  int index = 0;
+    private static int FindMaxIndex()
+    {
+        int max = _array[0];
+        int index = 0;
 
-  for (int i = 1; i < _array.Length; i++)
-  {
-   if (_array[i] >= max)
-   {
-    max = _array[i];
-    index = i;
-   }
-  }
-  return index;
- }
+        for (int i = 1; i < _array.Length; i++)
+        {
+            if (_array[i] >= max)
+            {
+                max = _array[i];
+                index = i;
+            }
+        }
+        return index;
+    }
 
- private static int SumFromMinToMax()
- {
-  int sum = 0;
+    private static int SumFromMinToMax()
+    {
+        int sum = 0;
 
-  if (FindMinIndex() < FindMaxIndex())
-  {
-   for (int i = FindMinIndex(); i <= FindMaxIndex(); i++)
-   sum += _array[i];
-  } 
-  else
-  {
-   for(int i = FindMaxIndex(); i <= FindMinIndex(); i++)
-   sum += _array[i];
-  }
-  return sum;
- }
+        //We can improve performance a bit and do not recalc indexes twice.
+        int minIndex = FindMinIndex();
+        int maxIndex = FindMaxIndex();
+        //If we had really huge array, it would make sense to locate min/max
+        // during single cycle "for",
+        // but this is just FYI, no code changes required. 
 
- public static void ExecuteTask()
- {
-  ReadInput();
-  Console.WriteLine("Array: ");
-  for (int i = 0; i < _array.Length; i++)
-  {
-   if (i != _array.Length - 1) Console.Write(_array[i] + ", ");
-   else Console.Write(_array[i]);
-  }
-  Console.WriteLine("\nSum of numbers from min to max: " + SumFromMinToMax());
- }
+        //Ternar operator, short form of "if"
+        minIndex = minIndex < maxIndex ? minIndex : maxIndex;
+        for (int i = minIndex; i <= maxIndex; i++) { 
+            sum += _array[i];
+        }
+        return sum;
+    }
+
+    public static void ExecuteTask()
+    {
+        ReadInput();
+        Console.WriteLine("Array: ");
+        for (int i = 0; i < _array.Length; i++)
+        {
+            if (i != _array.Length - 1) Console.Write(_array[i] + ", ");
+            else Console.Write(_array[i]);
+        }
+        Console.WriteLine("\nSum of numbers from min to max: " + SumFromMinToMax());
+    }
 }
