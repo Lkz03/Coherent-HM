@@ -40,8 +40,8 @@ class TaskTwo
   ReadInput();
   Console.Write("ISBN: ");
   if (GetCheckDigit() != 10)
-  Console.WriteLine("{0}{1}", _nineDigits, GetCheckDigit());
+   Console.WriteLine("{0}{1}", _nineDigits, GetCheckDigit());
   else
-  Console.WriteLine("{0}{1}", _nineDigits, 'X');
+   Console.WriteLine("{0}{1}", _nineDigits, 'X');
  }
 }
