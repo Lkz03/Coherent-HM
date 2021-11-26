@@ -45,3 +45,4 @@ class TaskTwo
    Console.WriteLine("{0}{1}", _nineDigits, 'X');
  }
 }
+
