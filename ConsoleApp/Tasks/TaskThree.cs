@@ -8,9 +8,9 @@ Example: array [1, 3, 5, 1, 0, 3, 0, 1]. The sum of the required elements = 5 + 
 
 class TaskThree
 {
- private static int[] _array;
+ private static int[] _array = new int[0];
 
- private static void readInput()
+ private static void ReadInput()
  {
  int temp;
 
@@ -25,7 +25,7 @@ class TaskThree
   }
  }
 
- private static int findMinLocation()
+ private static int FindMinIndex()
  {
   int min = _array[0];
   int index = 0;
@@ -41,7 +41,7 @@ class TaskThree
   return index;   
  }
 
- private static int findMaxLocation()
+ private static int FindMaxIndex()
  {
   int max = _array[0];
   int index = 0;
@@ -57,32 +57,32 @@ class TaskThree
   return index;
  }
 
- private static int sumFromMinToMax()
+ private static int SumFromMinToMax()
  {
   int sum = 0;
 
-  if (findMinLocation() < findMaxLocation())
+  if (FindMinIndex() < FindMaxIndex())
   {
-   for (int i = findMinLocation(); i <= findMaxLocation(); i++)
+   for (int i = FindMinIndex(); i <= FindMaxIndex(); i++)
    sum += _array[i];
   } 
   else
   {
-   for(int i = findMaxLocation(); i <= findMinLocation(); i++)
+   for(int i = FindMaxIndex(); i <= FindMinIndex(); i++)
    sum += _array[i];
   }
   return sum;
  }
 
- public static void executeTask()
+ public static void ExecuteTask()
  {
-  readInput();
+  ReadInput();
   Console.WriteLine("Array: ");
   for (int i = 0; i < _array.Length; i++)
   {
    if (i != _array.Length - 1) Console.Write(_array[i] + ", ");
    else Console.Write(_array[i]);
   }
-  Console.WriteLine("\nSum of numbers from min to max: " + sumFromMinToMax());
+  Console.WriteLine("\nSum of numbers from min to max: " + SumFromMinToMax());
  }
 }

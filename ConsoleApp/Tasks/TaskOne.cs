@@ -9,7 +9,7 @@ class TaskOne
  static private int _from, _to;
  static private string _string = String.Empty;
 
- static private void readInput()
+ static private void ReadInput()
  {
   Console.WriteLine("Enter number a");
   _from = Convert.ToInt32(Console.ReadLine());
@@ -17,7 +17,7 @@ class TaskOne
   _to = Convert.ToInt32(Console.ReadLine());
  }
 
- static private string convertToTernary(int N)
+ static private string ConvertToTernary(int N)
  {
   string ternaryNumber = String.Empty;
 
@@ -41,13 +41,13 @@ class TaskOne
   return false;
  }
 
- static public void executeTask()
+ static public void ExecuteTask()
  {
-  readInput();
+  ReadInput();
   Console.WriteLine("Number in an array from a to b that have a digit '2' in the ternary form:");
   for (int i=_from; i<=_to; i++)
   {
-   _string = convertToTernary(i);
+   _string = ConvertToTernary(i);
    if(hasTwos(_string)) Console.WriteLine(i);
   }
  }

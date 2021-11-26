@@ -15,13 +15,13 @@ class TaskTwo
  private const int _ISBNcount = 10;
  private static string _nineDigits = string.Empty;
 
- private static void readInput()
+ private static void ReadInput()
  {
   Console.WriteLine("Enter the 9 digits of ISBN number:");
   _nineDigits = Console.ReadLine();
  }
 
- private static int getCheckDigit()
+ private static int GetCheckDigit()
  {
   int multiplier = 1;
   int[] result = new int[9];
@@ -35,12 +35,12 @@ class TaskTwo
   return result.Sum() % 11;
  }
 
- public static void executeTask()
+ public static void ExecuteTask()
  {
-  readInput();
+  ReadInput();
   Console.Write("ISBN: ");
-  if (getCheckDigit() != 10)
-  Console.WriteLine("{0}{1}", _nineDigits, getCheckDigit());
+  if (GetCheckDigit() != 10)
+  Console.WriteLine("{0}{1}", _nineDigits, GetCheckDigit());
   else
   Console.WriteLine("{0}{1}", _nineDigits, 'X');
  }
