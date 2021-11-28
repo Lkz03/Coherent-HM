@@ -43,7 +43,7 @@ public class CheckTernaryFormInIntArray
    N /= 3;
   }
 
-  ReverseString(ternaryNumber);
+  ternaryNumber = ReverseString(ternaryNumber);
 
   return ternaryNumber;
  }
