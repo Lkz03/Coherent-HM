@@ -20,6 +20,13 @@ public class CheckTernaryFormInIntArray
   return Convert.ToInt32(Console.ReadLine());
  }
 
+ private static string ReverseString(string parString)
+ {
+  char[] charArray = parString.ToCharArray();
+  Array.Reverse(charArray);
+  return new string(charArray);
+ }
+
  static private string ConvertToTernary(int N)
  {
   string ternaryNumber = string.Empty;
@@ -35,6 +42,9 @@ public class CheckTernaryFormInIntArray
    ternaryNumber += N % 3;
    N /= 3;
   }
+
+  ReverseString(ternaryNumber);
+
   return ternaryNumber;
  }
 

@@ -4,6 +4,6 @@
  //For example: "CheckTernaryFormInIntArray.executeTask()" to "FindISBNLastDigit.executeTask()".
  static void Main()
  {
-  SumFromMinToMax.ExecuteTask();
+  CheckTernaryFormInIntArray.ExecuteTask();
  }
 }
