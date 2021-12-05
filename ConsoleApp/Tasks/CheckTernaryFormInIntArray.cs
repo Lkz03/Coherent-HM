@@ -14,7 +14,7 @@ public class CheckTernaryFormInIntArray
   return Convert.ToInt32(Console.ReadLine());
  }
 
- private static int ReturnArrayEnd() 
+ private static int ReturnArrayEnd()
  {
   Console.WriteLine("Enter a number for array's ending");
   return Convert.ToInt32(Console.ReadLine());
@@ -37,7 +37,7 @@ public class CheckTernaryFormInIntArray
    return ternaryNumber;
   }
 
-  while(N >= 1) 
+  while (N >= 1)
   {
    ternaryNumber += N % 3;
    N /= 3;
@@ -52,9 +52,9 @@ public class CheckTernaryFormInIntArray
  {
   int twoCount = 0;
 
-  for(int i=0; i<parString.Length; i++)
+  foreach (var variable in parString)
   {
-   if (parString[i] == '2')
+   if (variable == '2')
    {
     twoCount++;
    }
@@ -67,7 +67,7 @@ public class CheckTernaryFormInIntArray
   int from = ReturnArrayBeginning();
   int to = ReturnArrayEnd();
   Console.WriteLine("Number in an array from a to b that have two digits '2' in the ternary form:");
-  for (int i=from; i<=to; i++)
+  for (int i = from; i <= to; i++)
   {
    _string = ConvertToTernary(i);
    if (IsHasTwoTwos(_string))
