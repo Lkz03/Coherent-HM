@@ -103,17 +103,52 @@ class DiagonalMatrix: Matrix
 
  public static DiagonalMatrix AddMatrixes(DiagonalMatrix matrixOne, DiagonalMatrix matrixTwo)
  {
-  int sizeOfNewMatrix = matrixOne.Size >= matrixTwo.Size ? matrixOne.Size : matrixTwo.Size ;
-  int[] elementsOfNewMatrix = new int[sizeOfNewMatrix];
+  bool isSizeEqual = matrixOne.Size == matrixTwo.Size ? true : false;
+  int sizeOfNewMatrix;
+  int[] elementsOfNewMatrix;
 
-  for (int i = 0; i < sizeOfNewMatrix; i++)
+
+  if (isSizeEqual)
   {
-   elementsOfNewMatrix[i] =
-   matrixOne[i] == null || matrixTwo[i] == null ?
-   0 :
-   matrixOne[i] + matrixTwo[i];
+   elementsOfNewMatrix = new int[matrixOne.Size];
+
+   for (int i = 0; i < matrixOne.Size; i++)
+   {
+    elementsOfNewMatrix[i] = matrixOne[i] + matrixTwo[i];
+   }
   }
-  
+  else
+  {
+   if (matrixOne.Size > matrixTwo.Size)
+   {
+    sizeOfNewMatrix = matrixOne.Size;
+    elementsOfNewMatrix = new int[sizeOfNewMatrix];
+
+    for (int i = 0; i < matrixTwo.Size; i++)
+    {
+     elementsOfNewMatrix[i] = matrixOne[i] + matrixTwo[i];
+    }
+    for (int i = matrixTwo.Size; i < matrixOne.Size; i++)
+    {
+     elementsOfNewMatrix[i] = 0;
+    }
+   }
+   else
+   {
+    sizeOfNewMatrix = matrixTwo.Size;
+    elementsOfNewMatrix = new int[sizeOfNewMatrix];
+
+    for (int i = 0; i < matrixOne.Size; i++)
+    {
+     elementsOfNewMatrix[i] = matrixOne[i] + matrixTwo[i];
+    }
+    for (int i = matrixOne.Size; i < matrixTwo.Size; i++)
+    {
+     elementsOfNewMatrix[i] = 0;
+    }
+   }
+  }
+
   DiagonalMatrix newMatrix = new DiagonalMatrix(elementsOfNewMatrix);
   return newMatrix;
  }
