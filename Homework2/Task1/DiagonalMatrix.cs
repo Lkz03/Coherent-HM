@@ -80,17 +80,6 @@ class DiagonalMatrix
   }
  }
 
- //TESTING
- public void DisplayArray()
- {
-  Console.WriteLine("Size = " + Size);
-  foreach(var element in _matrixArray)
-  {
-   Console.Write(element + ", ");
-  }
- }
- //
-
  public int Track()
  {
   return _matrixArray.Sum();
