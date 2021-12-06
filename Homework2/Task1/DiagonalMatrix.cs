@@ -71,6 +71,7 @@ class DiagonalMatrix
   }
   else
   {
+   _matrixArray = new int[diagonalMatrixElements.Length];
    for (int i = 0; i < diagonalMatrixElements.Length; i++)
    { 
     this[i] = diagonalMatrixElements[i];
@@ -79,6 +80,19 @@ class DiagonalMatrix
   }
  }
 
- 
- 
+ //TESTING
+ public void DisplayArray()
+ {
+  Console.WriteLine("Size = " + Size);
+  foreach(var element in _matrixArray)
+  {
+   Console.Write(element + ", ");
+  }
+ }
+ //
+
+ public int Track()
+ {
+  return _matrixArray.Sum();
+ }
 }
