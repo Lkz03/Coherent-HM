@@ -96,7 +96,8 @@ class DiagonalMatrix: Matrix
      return false;
     }
    }
+   return true;
   }
-  return true;
+  return false;
  }
 }
