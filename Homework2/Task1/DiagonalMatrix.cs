@@ -29,7 +29,7 @@ of the method is a new diagonal matrix. If the dimensions of the matrix do not m
 smaller matrix is padded with zeros
 */
 
-class DiagonalMatrix
+class DiagonalMatrix: Matrix
 {
 
  private int _indexI;
@@ -41,7 +41,7 @@ class DiagonalMatrix
   set => _matrixArray[i] = value;
  }
  // Is this what was meant by the task1.4 ?
- private int MatrixBounds
+ public int MatrixBounds
  {
   get
   {
@@ -53,7 +53,7 @@ class DiagonalMatrix
    }
    return _indexI;
   }
-  set
+  private set
   {
    _indexI = value;
    _indexJ = value;
@@ -83,5 +83,20 @@ class DiagonalMatrix
  public int Track()
  {
   return _matrixArray.Sum();
+ }
+
+ public override bool Equals(int[] parArray)
+ {
+  if (Size == parArray.Length)
+  {
+   for (int i = 0; i < Size; i++)
+   {
+    if (parArray[i] != this[i])
+    {
+     return false;
+    }
+   }
+  }
+  return true;
  }
 }
