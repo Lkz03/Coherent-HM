@@ -35,10 +35,10 @@ class DiagonalMatrix: Matrix
  private int _indexI;
  private int _indexJ;
  private int[] _matrixArray;// should this be called -> "MatrixArray" ? Or the way it is now is okey ?
- private int this[int i]
+ public int this[int i]
  {
   get => _matrixArray[i];
-  set => _matrixArray[i] = value;
+  private set => _matrixArray[i] = value;
  }
  // Is this what was meant by the task1.4 ?
  public int MatrixBounds
