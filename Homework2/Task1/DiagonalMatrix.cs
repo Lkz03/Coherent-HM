@@ -61,7 +61,7 @@ class DiagonalMatrix: Matrix
  }
 
  // Is it alright to call it "Size" instead of "_size" if it is readonly ?
- private readonly int Size;
+ public readonly int Size;
 
  public DiagonalMatrix(params int[] diagonalMatrixElements) 
  {
@@ -99,5 +99,22 @@ class DiagonalMatrix: Matrix
    return true;
   }
   return false;
+ }
+
+ public static DiagonalMatrix AddMatrixes(DiagonalMatrix matrixOne, DiagonalMatrix matrixTwo)
+ {
+  int sizeOfNewMatrix = matrixOne.Size >= matrixTwo.Size ? matrixOne.Size : matrixTwo.Size ;
+  int[] elementsOfNewMatrix = new int[sizeOfNewMatrix];
+
+  for (int i = 0; i < sizeOfNewMatrix; i++)
+  {
+   elementsOfNewMatrix[i] =
+   matrixOne[i] == null || matrixTwo[i] == null ?
+   0 :
+   matrixOne[i] + matrixTwo[i];
+  }
+  
+  DiagonalMatrix newMatrix = new DiagonalMatrix(elementsOfNewMatrix);
+  return newMatrix;
  }
 }
