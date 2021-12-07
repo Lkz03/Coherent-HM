@@ -41,6 +41,7 @@ class DiagonalMatrix: Matrix
   private set => _matrixArray[i] = value;
  }
  // Is this what was meant by the task1.4 ?
+ // not sure what is the purpose of this method
  public int MatrixBounds
  {
   get
@@ -80,9 +81,16 @@ class DiagonalMatrix: Matrix
   }
  }
 
+ // not sure what is the purpose of this method
  public int Track()
  {
   return _matrixArray.Sum();
+ }
+
+ // not sure what is the purpose of this method
+ public override string ToString()
+ {
+  return string.Join(" ", _matrixArray);
  }
 
  public override bool Equals(int[] parArray)
