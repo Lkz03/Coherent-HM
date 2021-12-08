@@ -29,7 +29,7 @@ of the method is a new diagonal matrix. If the dimensions of the matrix do not m
 smaller matrix is padded with zeros
 */
 
-class DiagonalMatrix: Matrix
+class DiagonalMatrix : object
 {
 
  private int _indexI;
@@ -93,7 +93,8 @@ class DiagonalMatrix: Matrix
   return string.Join(" ", _matrixArray);
  }
 
- public override bool Equals(int[] parArray)
+ // does it need to be overriden if it's a virtual class
+ public bool Equals(int[] parArray)
  {
   if (Size == parArray.Length)
   {
