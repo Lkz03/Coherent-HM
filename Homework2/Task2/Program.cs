@@ -20,6 +20,34 @@ class Program
 {
  public static void Main()
  {
-  
+  Lecture lecture = new Lecture();
+  PracticalLesson practicalLesson = new PracticalLesson();
+  Training training = new Training();
+
+  training.Description = "this is training";
+  lecture.Description = "this is a lecture";
+  practicalLesson.Description = "this is a practical lesson";
+
+  training.Add(lecture);
+  training.Add(practicalLesson);
+
+  foreach (var subject in training.Subjects)
+  {
+   Console.WriteLine(subject.Description);
+  }
+
+  if (training.IsPractical())
+  {
+   Console.WriteLine("Is practical");
+  }
+  else
+  {
+   Console.WriteLine("Is not practical");
+  }
+
+  Training cloneOfTraining = training.Clone();
+  Console.WriteLine($"Description of the clone: {cloneOfTraining.Description}");
+  training.Description = "not any more";
+  Console.WriteLine($"Description of the clone: {cloneOfTraining.Description}");
  }
 }
