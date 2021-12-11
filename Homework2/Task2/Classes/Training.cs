@@ -11,6 +11,7 @@
   }
  }
 
+ public Training() { }
  public Training(string pString, List<ISubject> pList) 
  {
   Description = pString;
