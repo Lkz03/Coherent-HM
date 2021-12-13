@@ -7,10 +7,10 @@
   var DiagonalMatrixOne = new DiagonalMatrix(arrayOfElementsForMatrixOne);
   var DiagonalMatrixTwo = new DiagonalMatrix(arrayOfElementsForMatrixTwo);
 
-  var newDiagonalMatrix = DiagonalMatrix.AddMatrixes(DiagonalMatrixOne, DiagonalMatrixTwo);
-  for (int i = 0; i < newDiagonalMatrix.Size; i++)
+  DiagonalMatrixOne = DiagonalMatrixOne.AddMatrixes(DiagonalMatrixTwo);
+  for (int i = 0; i < DiagonalMatrixOne.Size; i++)
   {
-   Console.WriteLine(newDiagonalMatrix[i]);
+   Console.WriteLine(DiagonalMatrixOne[i]);
   }
  }
 }
