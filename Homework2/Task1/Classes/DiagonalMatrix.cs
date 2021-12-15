@@ -47,6 +47,7 @@ class DiagonalMatrix
    }
    return _matrixArray[i];
   }
+  private set => _matrixArray[i] = value;
  }
 
  // Is it alright to call it "Size" instead of "_size" if it is readonly ?
