@@ -10,7 +10,7 @@
   DiagonalMatrixOne = DiagonalMatrixOne.AddMatrixes(DiagonalMatrixTwo);
   for (int i = 0; i < DiagonalMatrixOne.Size; i++)
   {
-   Console.WriteLine(DiagonalMatrixOne[i]);
+   Console.WriteLine(DiagonalMatrixOne[i, i]);
   }
  }
 }

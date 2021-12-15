@@ -31,34 +31,23 @@ smaller matrix is padded with zeros
 
 class DiagonalMatrix
 {
-
- private int _indexI;
- private int _indexJ;
- private int[] _matrixArray;// should this be called -> "MatrixArray" ? Or the way it is now is okey ?
- public int this[int i]
- {
-  get => _matrixArray[i];
-  private set => _matrixArray[i] = value;
- }
- // Is this what was meant by the task1.4 ?
- // not sure what is the purpose of this method
- public int MatrixBounds
+ private int[] _matrixArray;
+ public int this[int i, int j]
  {
   get
   {
-   if (_indexI != _indexJ ||
-       _indexI < 0 ||
-       _indexI >= Size)
+   if (i != j)
    {
     return 0;
    }
-   return _indexI;
+   if (i < 0 ||
+       i >= Size)
+   {
+    throw new Exception();
+   }
+   return _matrixArray[i];
   }
-  private set
-  {
-   _indexI = value;
-   _indexJ = value;
-  }
+  private set => _matrixArray[i] = value;
  }
 
  // Is it alright to call it "Size" instead of "_size" if it is readonly ?
@@ -75,19 +64,17 @@ class DiagonalMatrix
    _matrixArray = new int[diagonalMatrixElements.Length];
    for (int i = 0; i < diagonalMatrixElements.Length; i++)
    { 
-    this[i] = diagonalMatrixElements[i];
+    this[i, i] = diagonalMatrixElements[i];
    }
    Size = diagonalMatrixElements.Length;
   }
  }
 
- // not sure what is the purpose of this method
  public int Track()
  {
   return _matrixArray.Sum();
  }
 
- // not sure what is the purpose of this method
  public override string ToString()
  {
   return string.Join(" ", _matrixArray);
@@ -100,7 +87,7 @@ class DiagonalMatrix
   {
    for (int i = 0; i < Size; i++)
    {
-    if (parArray[i] != this[i])
+    if (parArray[i] != this[i, i])
     {
      return false;
     }

@@ -13,7 +13,7 @@
 
    for (int i = 0; i < matrixOne.Size; i++)
    {
-    elementsOfNewMatrix[i] = matrixOne[i] + matrixTwo[i];
+    elementsOfNewMatrix[i] = matrixOne[i, i] + matrixTwo[i, i];
    }
   }
   else
@@ -25,7 +25,7 @@
 
     for (int i = 0; i < matrixTwo.Size; i++)
     {
-     elementsOfNewMatrix[i] = matrixOne[i] + matrixTwo[i];
+     elementsOfNewMatrix[i] = matrixOne[i, i] + matrixTwo[i, i];
     }
     for (int i = matrixTwo.Size; i < matrixOne.Size; i++)
     {
@@ -39,7 +39,7 @@
 
     for (int i = 0; i < matrixOne.Size; i++)
     {
-     elementsOfNewMatrix[i] = matrixOne[i] + matrixTwo[i];
+     elementsOfNewMatrix[i] = matrixOne[i, i] + matrixTwo[i, i];
     }
     for (int i = matrixOne.Size; i < matrixTwo.Size; i++)
     {
