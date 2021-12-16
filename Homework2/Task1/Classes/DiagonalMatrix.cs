@@ -36,17 +36,18 @@ class DiagonalMatrix
  {
   get
   {
-   if (i != j)
-   {
-    return 0;
-   }
    if (i < 0 ||
        i >= Size)
    {
     throw new Exception();
    }
+   if (i != j)
+   {
+    return 0;
+   }
    return _matrixArray[i];
   }
+
   private set => _matrixArray[i] = value;
  }
 
@@ -80,7 +81,6 @@ class DiagonalMatrix
   return string.Join(" ", _matrixArray);
  }
 
- // does it need to be overriden if it's a virtual class
  public bool Equals(int[] parArray)
  {
   if (Size == parArray.Length)
