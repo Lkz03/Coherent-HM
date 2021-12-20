@@ -3,9 +3,12 @@
  public static DiagonalMatrix AddMatrixes(this DiagonalMatrix matrixOne, DiagonalMatrix matrixTwo)
  {
   bool isSizeEqual = matrixOne.Size == matrixTwo.Size;
-  int sizeOfNewMatrix;
   int[] elementsOfNewMatrix;
 
+  void setNewMatrixSize(DiagonalMatrix parMatrix)
+  {
+   elementsOfNewMatrix = new int[parMatrix.Size];
+  }
 
   if (isSizeEqual)
   {
@@ -20,8 +23,7 @@
   {
    if (matrixOne.Size > matrixTwo.Size)
    {
-    sizeOfNewMatrix = matrixOne.Size;
-    elementsOfNewMatrix = new int[sizeOfNewMatrix];
+    setNewMatrixSize(matrixOne);
 
     for (int i = 0; i < matrixTwo.Size; i++)
     {
@@ -34,8 +36,7 @@
    }
    else
    {
-    sizeOfNewMatrix = matrixTwo.Size;
-    elementsOfNewMatrix = new int[sizeOfNewMatrix];
+    setNewMatrixSize(matrixTwo);
 
     for (int i = 0; i < matrixOne.Size; i++)
     {
