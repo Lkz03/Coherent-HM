@@ -10,7 +10,7 @@
    elementsOfNewMatrix = new int[parMatrix.Size];
   }
 
-  void AddElements(DiagonalMatrix parSmallerMatrix, DiagonalMatrix parBiggerMatrix)
+  void AddElementsWithPadding(DiagonalMatrix parSmallerMatrix, DiagonalMatrix parBiggerMatrix)
   {
    for (int i = 0; i < parSmallerMatrix.Size; i++)
    {
@@ -37,13 +37,13 @@
    {
     SetNewMatrixSize(matrixOne);
 
-    AddElements(matrixTwo, matrixOne);
+    AddElementsWithPadding(matrixTwo, matrixOne);
    }
    else
    {
     SetNewMatrixSize(matrixTwo);
 
-    AddElements(matrixOne, matrixTwo);
+    AddElementsWithPadding(matrixOne, matrixTwo);
    }
   }
 
