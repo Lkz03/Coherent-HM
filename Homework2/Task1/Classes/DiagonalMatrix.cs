@@ -28,6 +28,7 @@ considered equal if their sizes and the corresponding elements on the diagonal c
 of the method is a new diagonal matrix. If the dimensions of the matrix do not match, the
 smaller matrix is padded with zeros
 */
+using System.Text;
 
 class DiagonalMatrix
 {
@@ -51,7 +52,6 @@ class DiagonalMatrix
   private set => _matrixArray[i] = value;
  }
 
- // Is it alright to call it "Size" instead of "_size" if it is readonly ?
  public int Size { get; }
 
  public DiagonalMatrix(params int[] diagonalMatrixElements) 
@@ -78,7 +78,14 @@ class DiagonalMatrix
 
  public override string ToString()
  {
-  return string.Join(" ", _matrixArray);
+  StringBuilder stringBuilder = new StringBuilder();
+
+  for (int i = 0; i < Size; i++)
+  {
+   stringBuilder.Append(this[i, i]);
+  }
+
+  return stringBuilder.ToString();
  }
 
  public bool Equals(int[] parArray)
