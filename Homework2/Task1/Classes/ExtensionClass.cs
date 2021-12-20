@@ -5,9 +5,21 @@
   bool isSizeEqual = matrixOne.Size == matrixTwo.Size;
   int[] elementsOfNewMatrix;
 
-  void setNewMatrixSize(DiagonalMatrix parMatrix)
+  void SetNewMatrixSize(DiagonalMatrix parMatrix)
   {
    elementsOfNewMatrix = new int[parMatrix.Size];
+  }
+
+  void AddElements(DiagonalMatrix parSmallerMatrix, DiagonalMatrix parBiggerMatrix)
+  {
+   for (int i = 0; i < parSmallerMatrix.Size; i++)
+   {
+    elementsOfNewMatrix[i] = parSmallerMatrix[i, i] + parBiggerMatrix[i, i];
+   }
+   for (int i = parSmallerMatrix.Size; i < parBiggerMatrix.Size; i++)
+   {
+    elementsOfNewMatrix[i] = 0;
+   }
   }
 
   if (isSizeEqual)
@@ -23,29 +35,15 @@
   {
    if (matrixOne.Size > matrixTwo.Size)
    {
-    setNewMatrixSize(matrixOne);
+    SetNewMatrixSize(matrixOne);
 
-    for (int i = 0; i < matrixTwo.Size; i++)
-    {
-     elementsOfNewMatrix[i] = matrixOne[i, i] + matrixTwo[i, i];
-    }
-    for (int i = matrixTwo.Size; i < matrixOne.Size; i++)
-    {
-     elementsOfNewMatrix[i] = 0;
-    }
+    AddElements(matrixTwo, matrixOne);
    }
    else
    {
-    setNewMatrixSize(matrixTwo);
+    SetNewMatrixSize(matrixTwo);
 
-    for (int i = 0; i < matrixOne.Size; i++)
-    {
-     elementsOfNewMatrix[i] = matrixOne[i, i] + matrixTwo[i, i];
-    }
-    for (int i = matrixOne.Size; i < matrixTwo.Size; i++)
-    {
-     elementsOfNewMatrix[i] = 0;
-    }
+    AddElements(matrixOne, matrixTwo);
    }
   }
 
