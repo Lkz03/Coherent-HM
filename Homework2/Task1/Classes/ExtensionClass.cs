@@ -2,7 +2,7 @@
 {
  public static DiagonalMatrix AddMatrixes(this DiagonalMatrix matrixOne, DiagonalMatrix matrixTwo)
  {
-  bool isSizeEqual = matrixOne.Size == matrixTwo.Size ? true : false;
+  bool isSizeEqual = matrixOne.Size == matrixTwo.Size;
   int sizeOfNewMatrix;
   int[] elementsOfNewMatrix;
 
