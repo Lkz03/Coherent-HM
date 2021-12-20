@@ -52,7 +52,7 @@ class DiagonalMatrix
  }
 
  // Is it alright to call it "Size" instead of "_size" if it is readonly ?
- public readonly int Size;
+ public int Size { get; }
 
  public DiagonalMatrix(params int[] diagonalMatrixElements) 
  {
