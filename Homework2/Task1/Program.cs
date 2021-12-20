@@ -8,9 +8,6 @@
   var DiagonalMatrixTwo = new DiagonalMatrix(arrayOfElementsForMatrixTwo);
 
   DiagonalMatrixOne = DiagonalMatrixOne.AddMatrixes(DiagonalMatrixTwo);
-  for (int i = 0; i < DiagonalMatrixOne.Size; i++)
-  {
-   Console.WriteLine(DiagonalMatrixOne[i, i]);
-  }
+  Console.WriteLine(DiagonalMatrixOne.ToString());
  }
 }

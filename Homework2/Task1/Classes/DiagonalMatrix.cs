@@ -82,7 +82,7 @@ class DiagonalMatrix
 
   for (int i = 0; i < Size; i++)
   {
-   stringBuilder.Append(this[i, i]);
+   stringBuilder.Append(this[i, i] + " ");
   }
 
   return stringBuilder.ToString();
