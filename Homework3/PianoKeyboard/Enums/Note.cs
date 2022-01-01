@@ -1,4 +1,4 @@
-﻿enum Note
+﻿public enum Note
 {
  A,
  B,

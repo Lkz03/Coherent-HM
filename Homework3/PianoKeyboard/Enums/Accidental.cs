@@ -1,8 +1,8 @@
-﻿enum Accidental
+﻿public enum Accidental
 {
  Flat,
  Sharp,
- Neutral,
+ Neutral, // no-sign
  DoubleFlat,
  DoubleSharp
 }

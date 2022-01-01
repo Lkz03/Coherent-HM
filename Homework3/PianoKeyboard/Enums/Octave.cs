@@ -1,4 +1,4 @@
-﻿enum Octave
+﻿public enum Octave
 {
  First,
  Second,
