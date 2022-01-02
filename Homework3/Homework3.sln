@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31912.275
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PianoKeyboard", "PianoKeyboard\PianoKeyboard.csproj", "{3F46E697-212F-4FAD-AFF8-EBAD1ABEB683}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PianoKeyboard", "PianoKeyboard\PianoKeyboard.csproj", "{3F46E697-212F-4FAD-AFF8-EBAD1ABEB683}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StackPrototype", "StackPrototype\StackPrototype.csproj", "{AC88F1E1-0172-4202-8865-A3B502F5591D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{3F46E697-212F-4FAD-AFF8-EBAD1ABEB683}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F46E697-212F-4FAD-AFF8-EBAD1ABEB683}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F46E697-212F-4FAD-AFF8-EBAD1ABEB683}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC88F1E1-0172-4202-8865-A3B502F5591D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC88F1E1-0172-4202-8865-A3B502F5591D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC88F1E1-0172-4202-8865-A3B502F5591D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC88F1E1-0172-4202-8865-A3B502F5591D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
