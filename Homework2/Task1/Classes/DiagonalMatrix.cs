@@ -32,13 +32,14 @@ using System.Text;
 
 class DiagonalMatrix
 {
- private int[] _matrixArray;
+ private int[] MatrixArray { get; init; }
+
  public int this[int i, int j]
  {
   get
   {
-   if (i < 0 ||
-       i >= Size)
+   if (i < 0 || j < 0 ||
+       i >= Size || j >= Size )
    {
     throw new Exception();
    }
@@ -46,10 +47,10 @@ class DiagonalMatrix
    {
     return 0;
    }
-   return _matrixArray[i];
+   return MatrixArray[i];
   }
 
-  private set => _matrixArray[i] = value;
+  private set => MatrixArray[i] = value;
  }
 
  public int Size { get; }
@@ -62,7 +63,7 @@ class DiagonalMatrix
   }
   else
   {
-   _matrixArray = new int[diagonalMatrixElements.Length];
+   MatrixArray = new int[diagonalMatrixElements.Length];
    for (int i = 0; i < diagonalMatrixElements.Length; i++)
    { 
     this[i, i] = diagonalMatrixElements[i];
@@ -73,7 +74,7 @@ class DiagonalMatrix
 
  public int Track()
  {
-  return _matrixArray.Sum();
+  return MatrixArray.Sum();
  }
 
  public override string ToString()
