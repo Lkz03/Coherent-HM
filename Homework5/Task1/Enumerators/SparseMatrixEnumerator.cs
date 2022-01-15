@@ -12,12 +12,14 @@ namespace Task1.Enumerators
   public SparseMatrixEnumerator(SparseMatrix sparseMatrix)
   {
    _row = 0;
-   _col = -1;
+   _col = -1; // "-1" because in foreach loop first command is MoveNext()
    _sparseMatrix = sparseMatrix;
   }
 
+  // generic
   public int Current => _sparseMatrix[_row, _col];
 
+  // non generic
   object IEnumerator.Current => Current;
 
   public void Dispose()
@@ -33,18 +35,18 @@ namespace Task1.Enumerators
    {
     _col++;
    }
-   if (isRowOver)
+   else
    {
     _row++; 
     _col = 0;
    }
 
-   return _row >= _sparseMatrix.RowSize - 1 && _col >= _sparseMatrix.ColumnSize - 1 ? false : true;
+   return _row == _sparseMatrix.RowSize - 1 && _col == _sparseMatrix.ColumnSize - 1? false : true;
   }
 
   public void Reset()
   {
-   _row = -1;
+   _row = 0;
    _col = -1;
   }
  }

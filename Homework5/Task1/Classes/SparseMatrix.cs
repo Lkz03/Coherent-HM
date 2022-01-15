@@ -22,7 +22,7 @@ namespace Task1.Classes
     return _sparseMatrix[i, j];
    }
 
-   private set => _sparseMatrix[i, j] = value;
+   set => _sparseMatrix[i, j] = value;
   }
 
   public SparseMatrix(int rowSize, int columnSize) 
@@ -40,17 +40,57 @@ namespace Task1.Classes
   {
    StringBuilder stringBuilder = new StringBuilder();
 
-   foreach (var element in _sparseMatrix)
+   for (int i = 0; i < RowSize; i++)
    {
-    stringBuilder.Append(element);
+    for (int j = 0; j < ColumnSize; j++)
+    {
+     stringBuilder.Append(this[i, j]);
+     if (j == ColumnSize - 1)
+     {
+      stringBuilder.Append('\n');
+     }
+    }
    }
 
    return stringBuilder.ToString();
   }
 
+  public IEnumerable<(int, int, int)> GetNonZeroValues()
+  {
+   for (int i = 0; i < ColumnSize; i++)
+   {
+    for (int j = 0; j < RowSize; j++)
+    {
+     if (this[j, i] != 0)
+     {
+      yield return (j, i, this[j, i]);
+     }
+    }
+   }
+  }
+
+  public int GetCount(int number)
+  {
+   int count = 0;
+  
+   for (int i = 0; i < RowSize; i++)
+   {
+    for (int j = 0; j < ColumnSize; j++)
+    {
+     if (this[i, j] == number)
+     {
+      count++;
+     }
+    }
+   }
+
+   return count;
+  }
+
   // generic
   public IEnumerator<int> GetEnumerator()
   {
+   // I guess I could have used: "_sparseMatrix.GetEnumerator()", but I imagine the task was to learn to make one ourselves.
    return new SparseMatrixEnumerator(this);
   }
 
