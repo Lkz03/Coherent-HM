@@ -37,6 +37,6 @@ public class Program
    Console.WriteLine(item.Item1 + " " + item.Item2.Title);
   }
 
-  Console.WriteLine($"\nBook by ISBN number: 1234567891232 - {catalog["1234567891232"].Title}");
+  Console.WriteLine($"\nBook by ISBN number: 1234567891232 - {catalog["123-4-56-789123-2"].Title}");
  }
 }

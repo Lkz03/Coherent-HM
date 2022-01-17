@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Text;
 using Task2.Classes;
 
 namespace Task2.Collections
@@ -7,12 +8,29 @@ namespace Task2.Collections
  {
   private List<(string, Book)> _books = new List<(string, Book)> ();
 
-  // doesnt check for a different ISBN format yet
+  private string ReturnNormalizedISBNFormat(string ISBN)
+  {
+   if (ISBN.Length == 17)
+   {
+    StringBuilder stringBuilder = new StringBuilder();
+    for (int i = 0; i < 17; i++)
+    {
+     if (i != 3 && i != 5 && i != 8 && i != 15)
+     {
+      stringBuilder.Append(ISBN[i]);
+     }
+    }
+    return stringBuilder.ToString();
+   }
+   return ISBN;
+  }
+
   private bool IsDuplicate((string ISBN, Book book) bookTuple)
   {
+   var normalizedISBN = ReturnNormalizedISBNFormat(bookTuple.ISBN);
    foreach (var book in _books)
    {
-    if (book.Item1 == bookTuple.ISBN && book.Item2.Title == bookTuple.book.Title) // for simplisity I check only for titles instead of implementing Equals method
+    if (book.Item1 == normalizedISBN && book.Item2.Title == bookTuple.book.Title) // for simplisity I check only for titles instead of implementing Equals method
     {
      return true;
     }
@@ -20,12 +38,12 @@ namespace Task2.Collections
    return false;
   }
 
-  // doesnt check for a different ISBN format yet
   private bool IsKeyExists(string ISBN)
   {
+   var normalizedISBN = ReturnNormalizedISBNFormat(ISBN);
    foreach (var book in _books)
    {
-    if (book.Item1 == ISBN)
+    if (book.Item1 == normalizedISBN)
     {
      return true;
     }
@@ -33,12 +51,12 @@ namespace Task2.Collections
    return false;
   }
 
-  // doesnt check for a different ISBN format yet
   private Book GetBookByISBN(string ISBN)
   {
+   var normalizedISBN = ReturnNormalizedISBNFormat(ISBN);
    foreach (var book in _books)
    {
-    if (book.Item1 == ISBN)
+    if (book.Item1 == normalizedISBN)
     {
      return book.Item2 as Book;
     }
@@ -52,7 +70,8 @@ namespace Task2.Collections
    {
     throw new ArgumentException();
    }
-   _books.Add((ISBN, book));
+   var normalizedISBN = ReturnNormalizedISBNFormat(ISBN);
+   _books.Add((normalizedISBN, book));
   }
 
   public Book this[string ISBN]
