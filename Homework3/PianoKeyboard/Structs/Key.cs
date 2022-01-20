@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-public struct Key : IComparable
+﻿public struct Key : IComparable
 {
  public Note Note { get; init; }
  public Accidental Accidental { get; init; }
@@ -12,19 +10,14 @@ public struct Key : IComparable
   Accidental = accidental;
   Octave = octave;
  }
- 
- // If the key is in the same octave then it has a similar tone,
- // if comparing by tones, is this enough or do I need to compare by more properties?
  public bool Equals(Key otherKey)
  {
-  return otherKey.Octave == this.Octave ? true : false;
+  return otherKey.Octave == this.Octave;
  }
 
  public override string ToString()
  {
-  StringBuilder stringBuilder = new StringBuilder(Note + " " + Accidental + " " + Octave);
-
-  return stringBuilder.ToString();
+  return new string(Note + " " + Accidental + " " + Octave);
  }
 
  public int Compare(Key y)
