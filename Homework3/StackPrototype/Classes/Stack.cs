@@ -18,18 +18,19 @@
 
  public bool IsEmpty()
  {
-  return _top == 0 ? true : false;
+  return _top == 0;
  }
 
- public void Pop()
+ public T Pop()
  {
   if (this.IsEmpty())
   {
    throw new IndexOutOfRangeException();
   }
-
+  var temp = _array[_top];
   _array[_top] = default(T);
   _top--;
+  return temp;
  }
 
  public void Push(T parObject)
@@ -41,11 +42,6 @@
 
   _top++;
   _array[_top] = parObject;
- }
-
- public T Peek()
- {
-  return _array[_top];
  }
 
  public int Size()

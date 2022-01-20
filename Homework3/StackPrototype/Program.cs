@@ -45,8 +45,7 @@ public class Program
   Console.WriteLine("stack:");
   while (!stack.IsEmpty())
   {
-   Console.WriteLine(stack.Peek());
-   stack.Pop();
+   Console.WriteLine(stack.Pop());
   }
 
   for (int i = 1; i <= 10; i++)
@@ -58,8 +57,7 @@ public class Program
   Console.WriteLine("\nreversed stack:");
   while (!reversedStack.IsEmpty())
   {
-   Console.WriteLine(reversedStack.Peek());
-   reversedStack.Pop();
+   Console.WriteLine(reversedStack.Pop());
   }
 
  }
