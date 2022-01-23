@@ -22,17 +22,13 @@
 
    set
    {
-    if (i != j)
-    {
-     throw new Exception();
-    }
     if (!EqualityComparer<T>.Default.Equals(value, MatrixArray[i]) &&
         !EqualityComparer<T>.Default.Equals(value, default(T)))
     {
-     OnElementChange?.Invoke(this, MatrixArray[i], value, i);
+     T tempOldElement = MatrixArray[i];
      MatrixArray[i] = value;
+     OnElementChanged?.Invoke(this, new MatrixElementChangedEventArgs<T>(tempOldElement, value, i));
     }
-    // should I throw another exception here or doing nothing is fine ?
    }
   }
 
@@ -44,7 +40,7 @@
    }
    else
    {
-    MatrixArray = new T[diagonalMatrixElements.Length];
+    MatrixArray = diagonalMatrixElements;
     for (int i = 0; i < diagonalMatrixElements.Length; i++)
     {
      this[i, i] = diagonalMatrixElements[i];
@@ -66,8 +62,8 @@
    MatrixArray = new T[size];
   }
 
-  public delegate void ElementChange(object sender, T oldElement, T newElement, int indexOfOldElement);
+  public delegate void ElementChanged(object sender, EventArgs args);
 
-  public event ElementChange OnElementChange;
+  public event ElementChanged OnElementChanged;
  }
 }

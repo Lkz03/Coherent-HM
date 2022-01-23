@@ -2,27 +2,18 @@
 {
  class MatrixTracker<T>
  {
-  // is it okey to store event information like this?
-  private T _storedEventElement;
   private GenericDiagonalMatrix<T> _storedEventMatrix;
-  private int _storedIndexOfOldElement;
+  private MatrixElementChangedEventArgs<T> _storedElementChangedEventArgs;
 
-  public MatrixTracker(GenericDiagonalMatrix<T> matrix)
-  {
-   matrix.OnElementChange += DisplayEventMessage;
-  }
+  public MatrixTracker(GenericDiagonalMatrix<T> matrix) => matrix.OnElementChanged += DisplayEventMessage;
 
-  public void Undo()
-  {
-   _storedEventMatrix[_storedIndexOfOldElement, _storedIndexOfOldElement] = _storedEventElement;
-  }
+  public void Undo() => _storedEventMatrix[_storedElementChangedEventArgs.IndexOfOldElement, _storedElementChangedEventArgs.IndexOfOldElement] = _storedElementChangedEventArgs.OldElement;
 
-  public void DisplayEventMessage(object sender, T oldElement, T newElement, int indexOfOldElement)
+  public void DisplayEventMessage(object sender, EventArgs args)
   {
-   Console.WriteLine($"old element: {oldElement}\nnew element: {newElement}");
-   _storedEventElement = oldElement;
-   _storedIndexOfOldElement = indexOfOldElement;
    _storedEventMatrix = sender as GenericDiagonalMatrix<T>;
+   _storedElementChangedEventArgs = args as MatrixElementChangedEventArgs<T>;
+   Console.WriteLine($"old element: {_storedElementChangedEventArgs.OldElement}\nnew element: {_storedElementChangedEventArgs.NewElement}");
   }
  }
 }

@@ -4,7 +4,6 @@ static class ExtensionClass
  public delegate T Addition<T>(T firstElement, T secondElement);
  public static GenericDiagonalMatrix<T> AddMatrixes<T>(this GenericDiagonalMatrix<T> matrixOne, GenericDiagonalMatrix<T> matrixTwo, Addition<T> addition)
  {
-  bool isSizeEqual = matrixOne.Size == matrixTwo.Size;
   T[] elementsOfNewMatrix;
 
   void SetNewMatrixSize(GenericDiagonalMatrix<T> parMatrix)
@@ -12,41 +11,29 @@ static class ExtensionClass
    elementsOfNewMatrix = new T[parMatrix.Size];
   }
 
-  void AddElementsWithPadding(GenericDiagonalMatrix<T> smallerMatrix, GenericDiagonalMatrix<T> biggerMatrix)
+  void AddElementsWithPadding(GenericDiagonalMatrix<T> defaultMatrix, GenericDiagonalMatrix<T> biggerMatrix)
   {
-   for (int i = 0; i < smallerMatrix.Size; i++)
+   for (int i = 0; i < defaultMatrix.Size; i++)
    {
-    elementsOfNewMatrix[i] = addition(smallerMatrix[i, i], biggerMatrix[i, i]);
+    elementsOfNewMatrix[i] = addition(defaultMatrix[i, i], biggerMatrix[i, i]);
    }
-   for (int i = smallerMatrix.Size; i < biggerMatrix.Size; i++)
+   for (int i = defaultMatrix.Size; i < biggerMatrix.Size; i++)
    {
     elementsOfNewMatrix[i] = default(T);
    }
   }
 
-  if (isSizeEqual)
+  if (matrixOne.Size >= matrixTwo.Size)
   {
-   elementsOfNewMatrix = new T[matrixOne.Size];
+   SetNewMatrixSize(matrixOne);
 
-   for (int i = 0; i < matrixOne.Size; i++)
-   {
-    elementsOfNewMatrix[i] = addition(matrixOne[i, i], matrixTwo[i, i]);
-   }
+   AddElementsWithPadding(matrixTwo, matrixOne);
   }
   else
   {
-   if (matrixOne.Size > matrixTwo.Size)
-   {
-    SetNewMatrixSize(matrixOne);
+   SetNewMatrixSize(matrixTwo);
 
-    AddElementsWithPadding(matrixTwo, matrixOne);
-   }
-   else
-   {
-    SetNewMatrixSize(matrixTwo);
-
-    AddElementsWithPadding(matrixOne, matrixTwo);
-   }
+   AddElementsWithPadding(matrixOne, matrixTwo);
   }
 
   GenericDiagonalMatrix<T> newMatrix = new GenericDiagonalMatrix<T>(elementsOfNewMatrix);
