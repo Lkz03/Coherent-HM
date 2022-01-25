@@ -6,9 +6,22 @@ namespace Task1.Classes
 {
  class SparseMatrix : IEnumerable<int>
  {
-  private int[,] _sparseMatrix;
+  // all non zero values in sparse matrix, first int - row index, second int - column index, third int - value
+  private List<(int, int, int)> _values = new List<(int, int, int)>();
   public int RowSize { get; init; }
   public int ColumnSize { get; init; }
+
+  private int GetValueAtIndeces(int i, int j)
+  {
+   foreach (var element in _values)
+   {
+    if (element.Item1 == i && element.Item2 == j)
+    {
+     return element.Item3;
+    }
+   }
+   return 0;
+  }
 
   public int this[int i, int j]
   {
@@ -19,10 +32,21 @@ namespace Task1.Classes
     {
      throw new IndexOutOfRangeException();
     }
-    return _sparseMatrix[i, j];
+    return GetValueAtIndeces(i, j);
    }
 
-   set => _sparseMatrix[i, j] = value;
+   set
+   {
+    foreach (var element in _values)
+    {
+     if (element.Item1 == i && element.Item2 == j)
+     {
+      _values.Remove((i, j, value));
+      break;
+     }
+    }
+    _values.Add((i, j, value));
+   }
   }
 
   public SparseMatrix(int rowSize, int columnSize) 
@@ -33,7 +57,6 @@ namespace Task1.Classes
    }
    RowSize = rowSize;
    ColumnSize = columnSize;
-   _sparseMatrix = new int[RowSize, ColumnSize];
   }
 
   public override string ToString()
@@ -55,36 +78,19 @@ namespace Task1.Classes
    return stringBuilder.ToString();
   }
 
+  // ordering is done in program.cs, is it okey ?
+  // Ordering in the method would make the method very complicated instead of simple
   public IEnumerable<(int, int, int)> GetNonZeroValues()
   {
-   for (int i = 0; i < ColumnSize; i++)
+   foreach (var element in _values)
    {
-    for (int j = 0; j < RowSize; j++)
-    {
-     if (this[j, i] != 0)
-     {
-      yield return (j, i, this[j, i]);
-     }
-    }
+    yield return element;
    }
   }
 
   public int GetCount(int number)
   {
-   int count = 0;
-  
-   for (int i = 0; i < RowSize; i++)
-   {
-    for (int j = 0; j < ColumnSize; j++)
-    {
-     if (this[i, j] == number)
-     {
-      count++;
-     }
-    }
-   }
-
-   return count;
+   return _values.Count;
   }
 
   // generic

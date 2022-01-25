@@ -53,9 +53,10 @@ public class Program
   sparseMatrix[0, 1] = 2;
   sparseMatrix[0, 2] = 2;
   sparseMatrix[2, 1] = 3;
-  foreach ((int, int, int) element in sparseMatrix.GetNonZeroValues())
+
+  foreach ((int, int, int) element in sparseMatrix.GetNonZeroValues().OrderBy(x => x.Item2).ThenBy(x => x.Item1))
   {
-   Console.WriteLine(element);
+   Console.WriteLine(element.Item3);
   }
 
   Console.WriteLine($"\ncount of '2' is {sparseMatrix.GetCount(2)}");
