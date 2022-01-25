@@ -90,7 +90,14 @@ namespace Task1.Classes
 
   public int GetCount(int number)
   {
-   return _values.Count;
+   if (number == 0)
+   {
+    return RowSize * ColumnSize - _values.Count;
+   }
+   else
+   {
+    return _values.Count;
+   }
   }
 
   // generic
