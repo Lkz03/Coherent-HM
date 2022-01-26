@@ -7,21 +7,9 @@ namespace Task1.Classes
  class SparseMatrix : IEnumerable<int>
  {
   // all non zero values in sparse matrix, first int - row index, second int - column index, third int - value
-  private List<(int, int, int)> _values = new List<(int, int, int)>();
+  private Dictionary<(int, int), int> _values = new Dictionary<(int, int), int>();
   public int RowSize { get; init; }
   public int ColumnSize { get; init; }
-
-  private int GetValueAtIndeces(int i, int j)
-  {
-   foreach (var element in _values)
-   {
-    if (element.Item1 == i && element.Item2 == j)
-    {
-     return element.Item3;
-    }
-   }
-   return 0;
-  }
 
   public int this[int i, int j]
   {
@@ -32,22 +20,18 @@ namespace Task1.Classes
     {
      throw new IndexOutOfRangeException();
     }
-    return GetValueAtIndeces(i, j);
+    if (_values.ContainsKey((i, j)))
+    {
+     return _values.GetValueOrDefault((i, j));
+    }
+    else
+    {
+     return 0;
+    }
    }
 
-   set
-   {
-    foreach (var element in _values)
-    {
-     if (element.Item1 == i && element.Item2 == j)
-     {
-      _values.Remove((i, j, value));
-      break;
-     }
-    }
-    _values.Add((i, j, value));
+   set => _values[(i, j)] = value;
    }
-  }
 
   public SparseMatrix(int rowSize, int columnSize) 
   { 
@@ -84,7 +68,7 @@ namespace Task1.Classes
   {
    foreach (var element in _values)
    {
-    yield return element;
+    yield return (element.Key.Item1, element.Key.Item2, element.Value);
    }
   }
 
