@@ -60,5 +60,6 @@ public class Program
   }
 
   Console.WriteLine($"\ncount of '2' is {sparseMatrix.GetCount(2)}");
+  Console.WriteLine(sparseMatrix[0, 0]);
  }
 }

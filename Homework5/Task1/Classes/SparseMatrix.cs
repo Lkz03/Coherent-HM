@@ -20,14 +20,7 @@ namespace Task1.Classes
     {
      throw new IndexOutOfRangeException();
     }
-    if (_values.ContainsKey((i, j)))
-    {
-     return _values.GetValueOrDefault((i, j));
-    }
-    else
-    {
-     return 0;
-    }
+    return _values.GetValueOrDefault((i, j));
    }
 
    set => _values[(i, j)] = value;
