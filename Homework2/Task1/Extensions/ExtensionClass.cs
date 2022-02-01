@@ -1,7 +1,7 @@
 ﻿using Task1.Classes;
 static class ExtensionClass
 {
- public delegate T Addition<T>(T firstElement, T secondElement);
+ public delegate T Addition<T>(T BiggerMatrix, T defaultMatrix);
  public static GenericDiagonalMatrix<T> AddMatrixes<T>(this GenericDiagonalMatrix<T> matrixOne, GenericDiagonalMatrix<T> matrixTwo, Addition<T> addition)
  {
   T[] elementsOfNewMatrix;
@@ -17,9 +17,9 @@ static class ExtensionClass
    {
     elementsOfNewMatrix[i] = addition(defaultMatrix[i, i], biggerMatrix[i, i]);
    }
-   for (int i = defaultMatrix.Size; i < biggerMatrix.Size; i++)
+   for (int i = defaultMatrix.Size, j = defaultMatrix.Size; i < biggerMatrix.Size; i++, j++)
    {
-    elementsOfNewMatrix[i] = default(T);
+    elementsOfNewMatrix[i] = biggerMatrix[i, j];
    }
   }
 
