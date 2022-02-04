@@ -38,7 +38,7 @@ namespace Task1.Classes
 
   public SparseMatrix(int rowSize, int columnSize) 
   { 
-   if (RowSize < 0 || ColumnSize < 0)
+   if (rowSize < 0 || columnSize < 0)
    {
     throw new ArgumentOutOfRangeException();
    }

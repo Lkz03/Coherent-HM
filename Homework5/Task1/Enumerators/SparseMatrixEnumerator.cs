@@ -29,7 +29,7 @@ namespace Task1.Enumerators
 
   public bool MoveNext()
   {
-   bool isRowOver = _col < _sparseMatrix.ColumnSize - 1 ? false : true;
+   bool isRowOver = _col >= _sparseMatrix.ColumnSize - 1;
 
    if (!isRowOver)
    {
@@ -41,7 +41,7 @@ namespace Task1.Enumerators
     _col = 0;
    }
 
-   return _row == _sparseMatrix.RowSize - 1 && _col == _sparseMatrix.ColumnSize - 1? false : true;
+   return _row <= _sparseMatrix.RowSize - 1 && _col <= _sparseMatrix.ColumnSize - 1;
   }
 
   public void Reset()

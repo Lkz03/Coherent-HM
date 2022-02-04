@@ -35,7 +35,6 @@ public class Program
   Console.WriteLine("ToString:");
   Console.WriteLine(sparseMatrix.ToString());
 
-  // the last element of the matrix is missing in foreach loop, not sure why
   Console.WriteLine("Foreach:");
   int index = 0; // is there a better way to display all elements as a matrix in foreach ?
   foreach (var element in sparseMatrix)
