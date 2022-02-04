@@ -76,14 +76,7 @@ namespace Task2.Collections
 
   public Book this[string ISBN]
   {
-   get
-   {
-    if (!IsKeyExists(ISBN))
-    {
-     throw new KeyNotFoundException();
-    }
-    return GetBookByISBN(ISBN);
-   }
+   get => IsKeyExists(ISBN) ? GetBookByISBN(ISBN) : throw new KeyNotFoundException();
   }
 
   public IEnumerator<(string, Book)> GetEnumerator()
