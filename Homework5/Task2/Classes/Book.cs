@@ -2,8 +2,21 @@
 {
  class Book
  {
-  private string _title;  
-  public List<string> Authors { get; set; }
+  private string _title;
+  private HashSet<string> _authors;
+  public HashSet<string> Authors
+  {
+   get => _authors;
+
+   set
+   {
+    if (value is null)
+    {
+     throw new ArgumentNullException(nameof(value));
+    }
+    _authors = value;
+   }
+  }
   public string Title 
   {
    get => _title;
@@ -21,6 +34,6 @@
 
   public Book(string title) => Title = title;
   public Book(string title, DateOnly date) : this(title) => Date = date;
-  public Book(string title, DateOnly date, List<string> authors) : this(title, date) => Authors = authors;
+  public Book(string title, DateOnly date, HashSet<string> authors) : this(title, date) => Authors = authors;
  }
 }
