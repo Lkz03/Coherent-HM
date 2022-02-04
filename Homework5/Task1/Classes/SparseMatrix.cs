@@ -23,8 +23,18 @@ namespace Task1.Classes
     return _values.GetValueOrDefault((i, j));
    }
 
-   set => _values[(i, j)] = value;
+   set
+   {
+    if (value != 0)
+    {
+     _values[(i, j)] = value;
+    }
+    else if (_values.GetValueOrDefault((i, j)) != 0)
+    {
+     _values.Remove((i, j));
+    }
    }
+  }
 
   public SparseMatrix(int rowSize, int columnSize) 
   { 
