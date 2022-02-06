@@ -32,6 +32,8 @@ public class Program
   list.Add(new EmployeeVacationInformation("Bob", new DateTime(2021, 3, 10), new DateTime(2021, 5, 10)));
   list.Add(new EmployeeVacationInformation("Al", new DateTime(2021, 3, 1), new DateTime(2021, 6, 1)));
   list.Add(new EmployeeVacationInformation("John", new DateTime(2010, 10, 10), new DateTime(2010, 10, 30)));
+  list.Add(new EmployeeVacationInformation("Bob", new DateTime(2021, 3, 12), new DateTime(2021, 4, 30)));
+  list.Add(new EmployeeVacationInformation("John", new DateTime(2021, 3, 10), new DateTime(2021, 4, 30)));
 
   foreach (var item in list)
   {
@@ -47,18 +49,18 @@ public class Program
   }
 
   Console.WriteLine("\nNumber of employees on vacation during different months:");
-  foreach (var item in VacationInformationTools.GetNumberOfEmplyeesOnVacationByMonth(list).OrderByDescending(x => x.Item2).ThenBy(x => x.Item1))
+  foreach (var item in VacationInformationTools.GetNumberOfEmployeesOnVacationByMonth(list).OrderByDescending(x => x.Item2).ThenBy(x => x.Item1))
   {
    Console.WriteLine($"Count of emplyees: {item.Item2}\nMonth of vacation: {item.Item1}\n");
   }
 
   Console.WriteLine("Dates of 2021 when no vacations took place:");
-  List<DateTime> listOfDatesOfWhenNoVacationsTookPlaceIn2021 = VacationInformationTools.GetMonthsWhenNoVacationTookPlaceByYear(list, 2021);
+  var listOfDatesOfWhenNoVacationsTookPlaceIn2021 = VacationInformationTools.GetMonthsWhenNoVacationTookPlaceByYear(list, 2021);
   foreach (var item in listOfDatesOfWhenNoVacationsTookPlaceIn2021)
   {
    Console.WriteLine($"{item.Year} - {item.Month} - {item.Day}");
   }
-
+  
   Console.WriteLine("\nEmployees which had multiple vacations:");
   foreach (var item in VacationInformationTools.CheckData(list))
   {

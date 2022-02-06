@@ -5,33 +5,33 @@ namespace Task3.Classes
 {
  public static class VacationInformationTools
  {
-  public static double GetAverageVacationDuration(List<EmployeeVacationInformation> list)
+  public static double GetAverageVacationDuration(IEnumerable<EmployeeVacationInformation> list)
   {
    return list.Average(x => (x.LastDayVacation.Date - x.FirstDayVacation.Date).Days);
   }
 
-  public static IEnumerable<(string, double)> GetAverageEmployeeVacationDuration(List<EmployeeVacationInformation> list)
+  public static IEnumerable<(string, double)> GetAverageEmployeeVacationDuration(IEnumerable<EmployeeVacationInformation> list)
   {
    var uniqueName = list.Select(x => x.Name).Distinct();
 
-   double GetEmplyeeAverageVacationDurationByName(string name, List<EmployeeVacationInformation> list)
+   double GetEmployeeAverageVacationDurationByName(string name, IEnumerable<EmployeeVacationInformation> list)
    {
     return list.Where(x => x.Name == name).Average(x => (x.LastDayVacation.Date - x.FirstDayVacation.Date).Days);
    }
 
    foreach (var name in uniqueName)
    {
-    yield return (name, GetEmplyeeAverageVacationDurationByName(name, list));
+    yield return (name, GetEmployeeAverageVacationDurationByName(name, list));
    }
   }
 
-  public static IEnumerable<(int, int)> GetNumberOfEmplyeesOnVacationByMonth(List<EmployeeVacationInformation> list)
+  public static IEnumerable<(int, int)> GetNumberOfEmployeesOnVacationByMonth(IEnumerable<EmployeeVacationInformation> list)
   {
    int[] months = new int[14];
 
-   foreach (var emplyee in list)
+   foreach (var employee in list)
    {
-    for (int i = emplyee.FirstDayVacation.Month; i <= emplyee.LastDayVacation.Month; i++)
+    for (int i = employee.FirstDayVacation.Month; i <= employee.LastDayVacation.Month; i++)
     {
      months[i]++;
     }
@@ -46,7 +46,7 @@ namespace Task3.Classes
    }
   }
 
-  public static List<DateTime> GetMonthsWhenNoVacationTookPlaceByYear(List<EmployeeVacationInformation> list, int year)
+  public static ICollection<DateTime> GetMonthsWhenNoVacationTookPlaceByYear(IEnumerable<EmployeeVacationInformation> list, int year)
   {
    List<EmployeeVacationInformation> newList = list.Where(x => x.LastDayVacation.Year >= year && x.FirstDayVacation.Year <= year).ToList();
    
@@ -82,33 +82,51 @@ namespace Task3.Classes
    return datesWhenNoVacationsTookPlace;
   }
 
-  public static IEnumerable<(string, bool)> CheckData(List<EmployeeVacationInformation> list)
+  public static IEnumerable<(string, bool)> CheckData(IEnumerable<EmployeeVacationInformation> list)
   {
-   var duplicates = list.GroupBy(x => x.Name).Where(x => x.Count() > 1).Select(x => x.Key);
-
-   var query = from employee in list
-               join duplicate in duplicates
-               on employee.Name
-               equals duplicate
-               where employee.Name == duplicate
-               select employee;
-
-   (string, bool) temp = (default(string), default(bool));
- 
-   foreach (var employee in query.DistinctBy(x => x.Name))
+   IEnumerable<(string, bool)> Intersections(IGrouping<string, EmployeeVacationInformation> x)
    {
-    temp.Item1 = employee.Name;
-    foreach (var duplicate in query.Where(x => x.Name == employee.Name && x != employee))
+    var distinctNames = x.DistinctBy(x => x.Name);
+    
+    DateTime defaultStartDate;
+    DateTime defaultEndDate;
+
+    (string, bool) temp = new (default, false);
+
+    foreach (var distinctEmployee in distinctNames)
     {
-     if (employee.LastDayVacation >= duplicate.FirstDayVacation && employee.LastDayVacation <= duplicate.LastDayVacation)
+     temp.Item1 = distinctEmployee.Name;
+     defaultStartDate = distinctEmployee.FirstDayVacation;
+     defaultEndDate = distinctEmployee.LastDayVacation;
+     foreach (var employee in list)
      {
-      temp.Item2 = true;
-      break;
+      if (distinctEmployee == employee || distinctEmployee.Name != employee.Name)
+      {
+       continue;
+      }
+      if (employee.FirstDayVacation <= defaultEndDate && employee.LastDayVacation >= defaultStartDate)
+      {
+       temp.Item2 = true;
+       if (employee.FirstDayVacation < defaultStartDate)
+       {
+        defaultStartDate = employee.FirstDayVacation;
+       }
+       if (employee.LastDayVacation > defaultEndDate)
+       {
+        defaultEndDate = employee.LastDayVacation;
+       }
+      }
      }
-     temp.Item2 = false;
     }
+
     yield return temp;
    }
+
+   var intersections = list.GroupBy(x => x.Name)
+                           .Where(x => x.Count() > 1)
+                           .SelectMany(x => Intersections(x));
+
+   return intersections;
   }
  }
 }
