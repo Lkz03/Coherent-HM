@@ -16,14 +16,13 @@ library and test the work of types from it.
  */
 
 using Task1.Classes;
+using Attributes;
 
 public class Program
 {
  public static void Main()
  {
-  DummyClass[] objects = { new DummyClass("test1name", "test1desc"),
-                           new DummyClass("test2name", "test2desc"),
-                           new DummyClass("test3name", "test3desc")};
+  DummyClass[] objects = { new DummyClass("test1name", "test1desc")};
 
   Logger logger = new Logger("LoggerName");
 
