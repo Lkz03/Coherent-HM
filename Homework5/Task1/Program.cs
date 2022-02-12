@@ -53,7 +53,7 @@ public class Program
   sparseMatrix[0, 2] = 2;
   sparseMatrix[2, 1] = 3;
 
-  foreach ((int, int, int) element in sparseMatrix.GetNonZeroValues().OrderBy(x => x.Item2).ThenBy(x => x.Item1))
+  foreach ((int, int, int) element in sparseMatrix.GetNonZeroValues())
   {
    Console.WriteLine(element.Item3);
   }

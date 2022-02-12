@@ -38,7 +38,7 @@ namespace Task1.Classes
 
   public SparseMatrix(int rowSize, int columnSize) 
   { 
-   if (rowSize < 0 || columnSize < 0)
+   if (rowSize <= 0 || columnSize <= 0)
    {
     throw new ArgumentOutOfRangeException();
    }
@@ -65,14 +65,17 @@ namespace Task1.Classes
    return stringBuilder.ToString();
   }
 
-  // ordering is done in program.cs, is it okey ?
-  // Ordering in the method would make the method very complicated instead of simple
   public IEnumerable<(int, int, int)> GetNonZeroValues()
   {
-   foreach (var element in _values)
+   IEnumerable<(int, int, int)> AppendNonZeroValues(Dictionary<(int, int), int> values)
    {
-    yield return (element.Key.Item1, element.Key.Item2, element.Value);
+    foreach (var element in _values)
+    {
+     yield return (element.Key.Item1, element.Key.Item2, element.Value);
+    }
    }
+
+   return AppendNonZeroValues(_values).OrderBy(x => x.Item2).ThenBy(x => x.Item1);
   }
 
   public int GetCount(int number)
