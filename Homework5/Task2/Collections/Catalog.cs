@@ -38,19 +38,6 @@ namespace Task2.Collections
    return false;
   }
 
-  private bool IsKeyExists(string ISBN)
-  {
-   var normalizedISBN = ReturnNormalizedISBNFormat(ISBN);
-   foreach (var book in _books)
-   {
-    if (book.Item1 == normalizedISBN)
-    {
-     return true;
-    }
-   }
-   return false;
-  }
-
   private Book GetBookByISBN(string ISBN)
   {
    var normalizedISBN = ReturnNormalizedISBNFormat(ISBN);
@@ -76,7 +63,7 @@ namespace Task2.Collections
 
   public Book this[string ISBN]
   {
-   get => IsKeyExists(ISBN) ? GetBookByISBN(ISBN) : throw new KeyNotFoundException();
+   get => GetBookByISBN(ISBN);
   }
 
   public IEnumerator<(string, Book)> GetEnumerator()
