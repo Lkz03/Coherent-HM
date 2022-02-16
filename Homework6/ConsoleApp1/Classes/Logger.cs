@@ -53,7 +53,7 @@ namespace Task1.Classes
     return list;
    }
 
-   string GetSerializedObjectStringByPropertyList<T>(List<PropertyInfo> customPropAttributes, List<FieldInfo> customFieldAttributes, params T[] objects)
+   string GetSerializedObjectStringByPropertyList<T>(List<PropertyInfo> propertiesWithAttributes, List<FieldInfo> fieldsWithAttributes, params T[] objects)
    {
     StringBuilder sb = new StringBuilder();
 
@@ -61,39 +61,33 @@ namespace Task1.Classes
     {
      if (typeof(T).IsDefined(typeof(TrackingEntityAttribute), false))
      {
-      foreach (var attribute in customPropAttributes)
+      foreach (var attribute in propertiesWithAttributes)
       {
-       if (attribute is not null)
+       if (attribute.GetCustomAttribute<TrackingPropertyAttribute>().PropertyName is not null)
        {
-        if (Attribute.IsDefined(attribute, typeof(TrackingPropertyAttribute)) && attribute.GetCustomAttribute<TrackingPropertyAttribute>().PropertyName is not null)
-        {
-         sb.Append(attribute.GetCustomAttribute<TrackingPropertyAttribute>().PropertyName);
-        }
-        else
-        {
-         sb.Append(attribute.Name);
-        }
-        sb.Append(":");
-        sb.Append(attribute.GetValue(obj));
-        sb.Append(Environment.NewLine);
+        sb.Append(attribute.GetCustomAttribute<TrackingPropertyAttribute>().PropertyName);
        }
+       else
+       {
+        sb.Append(attribute.Name);
+       }
+       sb.Append(":");
+       sb.Append(attribute.GetValue(obj));
+       sb.Append(Environment.NewLine);
       }
-      foreach (var attribute in customFieldAttributes)
+      foreach (var attribute in fieldsWithAttributes)
       {
-       if (attribute is not null)
+       if (attribute.GetCustomAttribute<TrackingPropertyAttribute>().PropertyName is not null)
        {
-        if (Attribute.IsDefined(attribute, typeof(TrackingPropertyAttribute)) && attribute.GetCustomAttribute<TrackingPropertyAttribute>().PropertyName is not null)
-        {
-         sb.Append(attribute.GetCustomAttribute<TrackingPropertyAttribute>().PropertyName);
-        }
-        else
-        {
-         sb.Append(attribute.Name);
-        }
-        sb.Append(":");
-        sb.Append(attribute.GetValue(obj));
-        sb.Append(Environment.NewLine);
+        sb.Append(attribute.GetCustomAttribute<TrackingPropertyAttribute>().PropertyName);
        }
+       else
+       {
+        sb.Append(attribute.Name);
+       }
+       sb.Append(":");
+       sb.Append(attribute.GetValue(obj));
+       sb.Append(Environment.NewLine);
       }
      }
      else
